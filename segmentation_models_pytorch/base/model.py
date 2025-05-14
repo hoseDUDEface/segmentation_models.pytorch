@@ -75,7 +75,9 @@ class SegmentationModel(torch.nn.Module, SMPHubMixin):
             labels = self.classification_head(features[-1])
             return masks, labels
 
-        return masks
+        return {'segmentation_masks':masks,
+                'encoder_output': features[-1]
+                }
 
     @torch.no_grad()
     def predict(self, x):
